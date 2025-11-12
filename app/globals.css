@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
+/* Switzer font: we inline @font-face below instead of @import to avoid post-Tailwind @import ordering errors */
+
+/* Source-of-truth brand variables (non Tailwind) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --brand-off-white: #f7f7f2; /* soft off-white */
+  --brand-dark: #0a0a0a; /* deep near-black */
+  --brand-luxury: #0c1f3f; /* luxury navy blue (light) */
 }
 
+/* Custom CSS variables usable in arbitrary CSS (not Tailwind config) */
+:root {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-offwhite: var(--brand-off-white);
+  --color-dark: var(--brand-dark);
+  --color-luxury: var(--brand-luxury);
+  --font-sans: "Switzer", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Tailwind v4 theme tokens so utilities (bg-off-white, from-dark, etc.) resolve */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-off-white: var(--brand-off-white);
+  --color-dark: var(--brand-dark);
+  --color-luxury: var(--brand-luxury);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    /* Swap luxury accent to gold by updating brand variable */
+    --brand-luxury: #d4af37;
   }
+}
+
+/* Unify Switzer into a single family name so Tailwind font-weight utilities work */
+@font-face {
+  font-family: "Switzer";
+  src: url("/fonts/Switzer-Variable.woff2") format("woff2"),
+       url("/fonts/Switzer-Variable.woff") format("woff"),
+       url("/fonts/Switzer-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("/fonts/Switzer-VariableItalic.woff2") format("woff2"),
+       url("/fonts/Switzer-VariableItalic.woff") format("woff"),
+       url("/fonts/Switzer-VariableItalic.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Default to our Tailwind sans stack using Switzer */
+  font-family: var(--font-sans);
 }
+
+/* Simple color utility classes using the palette above */
+/* Off-white */
+.bg-off-white { background-color: var(--color-offwhite); }
+.text-off-white { color: var(--color-offwhite); }
+.border-off-white { border-color: var(--color-offwhite); }
+
+/* Dark */
+.bg-dark { background-color: var(--color-dark); }
+.text-dark { color: var(--color-dark); }
+.border-dark { border-color: var(--color-dark); }
+
+/* Luxury accent (navy in light, gold in dark) */
+.bg-luxury { background-color: var(--color-luxury); }
+.text-luxury { color: var(--color-luxury); }
+.border-luxury { border-color: var(--color-luxury); }
+
+/* Semantic alias matching your wording */
+.bg-luxury-navy { background-color: var(--color-luxury); }
+.text-luxury-navy { color: var(--color-luxury); }
+.border-luxury-navy { border-color: var(--color-luxury); }
+
+/* Optional fixed gold/navy classes if you need to force either regardless of theme */
+.bg-luxury-gold { background-color: #d4af37; }
+.text-luxury-gold { color: #d4af37; }
+.border-luxury-gold { border-color: #d4af37; }
+.bg-luxury-static-navy { background-color: #0c1f3f; }
+.text-luxury-static-navy { color: #0c1f3f; }
+.border-luxury-static-navy { border-color: #0c1f3f; }
+
+/* Backfill helpers used elsewhere */
+.bg-foreground { background-color: var(--color-foreground); }
+.text-foreground { color: var(--color-foreground); }
+.border-foreground { border-color: var(--color-foreground); }
+.bg-background { background-color: var(--background); }
+.text-background { color: var(--background); }
+.border-background { border-color: var(--background); }
