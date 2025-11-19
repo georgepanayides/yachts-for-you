@@ -117,45 +117,42 @@ export default function YachtPage({ params }: { params: { id: string } }) {
 				</div>
 			</section>
 
-			{/* Title and quick stats */}
-            <div className="px-12 py-5">
-			<section className="mb-8">
-				<h1 className="text-3xl md:text-4xl font-light tracking-tight text-dark dark:text-off-white">
-					{yacht.title}
-				</h1>
-				<div className="mt-4 flex flex-wrap items-center gap-2">
-					{typeof yacht.sizeMeters === "number" && (
-						<span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-off-white px-3 py-1 text-xs font-medium text-zinc-700 dark:border-white/15 dark:bg-white/10 dark:text-zinc-200">
-							<LuRuler className="h-3.5 w-3.5" />
-							{yacht.sizeMeters}m
-						</span>
-					)}
-					{yacht.date && (
-						<span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-off-white px-3 py-1 text-xs font-medium text-zinc-700 dark:border-white/15 dark:bg-white/10 dark:text-zinc-200">
-							<LuCalendar className="h-3.5 w-3.5" />
-							{yacht.date}
-						</span>
-					)}
-					{typeof yacht.guests === "number" && (
-						<span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-off-white px-3 py-1 text-xs font-medium text-zinc-700 dark:border-white/15 dark:bg-white/10 dark:text-zinc-200">
-							<LuUsers className="h-3.5 w-3.5" />
-							{yacht.guests} guests
-						</span>
-					)}
-					{typeof yacht.cabins === "number" && (
-						<span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-off-white px-3 py-1 text-xs font-medium text-zinc-700 dark:border-white/15 dark:bg-white/10 dark:text-zinc-200">
-							<LuBedDouble className="h-3.5 w-3.5" />
-							{yacht.cabins} cabins
-						</span>
-					)}
-				</div>
-			</section>
+			{/* Content split 65% / 35% */}
+			<section className="px-12 py-8 grid gap-10 md:grid-cols-[65%_35%]">
+				{/* Left: title, pills, description, features */}
+				<div>
+					<h1 className="text-3xl md:text-6xl font-light tracking-tight text-dark dark:text-off-white">
+						{yacht.title}
+					</h1>
+					<div className="mt-4 flex flex-wrap items-center gap-2">
+						{typeof yacht.sizeMeters === "number" && (
+							<span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-off-white px-3 py-1 text-xs font-medium text-zinc-700 dark:border-white/15 dark:bg-white/10 dark:text-zinc-200">
+								<LuRuler className="h-3.5 w-3.5" />
+								{yacht.sizeMeters}m
+							</span>
+						)}
+						{yacht.date && (
+							<span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-off-white px-3 py-1 text-xs font-medium text-zinc-700 dark:border-white/15 dark:bg-white/10 dark:text-zinc-200">
+								<LuCalendar className="h-3.5 w-3.5" />
+								{yacht.date}
+							</span>
+						)}
+						{typeof yacht.guests === "number" && (
+							<span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-off-white px-3 py-1 text-xs font-medium text-zinc-700 dark:border-white/15 dark:bg-white/10 dark:text-zinc-200">
+								<LuUsers className="h-3.5 w-3.5" />
+								{yacht.guests} guests
+							</span>
+						)}
+						{typeof yacht.cabins === "number" && (
+							<span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-off-white px-3 py-1 text-xs font-medium text-zinc-700 dark:border-white/15 dark:bg-white/10 dark:text-zinc-200">
+								<LuBedDouble className="h-3.5 w-3.5" />
+								{yacht.cabins} cabins
+							</span>
+						)}
+					</div>
 
-			{/* Content split: description + sidebar */}
-			<section className="mb-16 grid gap-10 md:grid-cols-3">
-				<div className="md:col-span-2">
 					<h2 className="sr-only">Overview</h2>
-					<p className="text-md leading-relaxed text-zinc-700 dark:text-zinc-300">
+					<p className="mt-6 text-md leading-relaxed text-zinc-700 dark:text-zinc-300">
 						{yacht.description}
 					</p>
 
@@ -179,8 +176,8 @@ export default function YachtPage({ params }: { params: { id: string } }) {
 					)}
 				</div>
 
-				{/* Sidebar: price and CTA */}
-				<aside className="md:col-span-1">
+				{/* Right: price and CTAs */}
+				<aside className="px-12 py-8">
 					<div className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
 						<div className="text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">From</div>
 						<div className="mt-1 text-2xl font-semibold text-dark dark:text-off-white">
@@ -195,10 +192,8 @@ export default function YachtPage({ params }: { params: { id: string } }) {
 							</Link>
 						</div>
 					</div>
-                    
 				</aside>
 			</section>
-            </div>
 		</main>
 	);
 }

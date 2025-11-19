@@ -67,23 +67,21 @@ const yachts = [
 export default function YachtList() {
 	return (
 		<section className="relative mx-auto p-20">
-			{/* Section heading with action */}
-			<div className="mb-10 flex items-end justify-between border-b border-black/10 pb-6 dark:border-white/10">
-				<div>
-					<h2 className="text-2xl md:text-3xl font-light uppercase tracking-tight text-dark dark:text-off-white">
-						Featured Yachts
-					</h2>
-					<p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-						Explore a curated selection of charter-ready vessels.
-					</p>
-				</div>
-				<div className="ml-6 flex shrink-0 items-center">
+			{/* Section intro: spacious, centered, no divider */}
+			<div className="mx-auto mb-14 max-w-4xl text-center md:mb-20">
+				<h2 className="text-4xl md:text-6xl font-light tracking-tight text-dark dark:text-off-white">
+					Discover our yachts for sale
+				</h2>
+				<p className="mx-auto mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+					Buy from our world‑class fleet ranging from 25m to 80m+, with access to some exclusive luxury superyachts.
+				</p>
+				<div className="mt-10 flex justify-center">
 					<Link
-						className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-xs font-medium uppercase tracking-wide text-dark transition hover:bg-off-white/80 dark:border-white/20 dark:text-off-white dark:hover:bg-white/10"
-						aria-label="See all yachts"
 						href="/yachts"
+						className="inline-flex items-center gap-2 rounded-full border border-luxury/40 px-6 py-3 text-sm font-medium text-luxury transition"
+						aria-label="See all yachts"
 					>
-						See all
+						View all yachts
 						<span className="block h-3 w-3 rotate-[-45deg] border-b border-r border-current" />
 					</Link>
 				</div>
